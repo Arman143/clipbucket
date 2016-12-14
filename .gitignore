@@ -9,3 +9,9 @@
 
 /upload/includes/dbconnect.php
 /upload/includes/clipbucket.php
+
+
+/upload/.idea
+upload/cache/*
+upload/files/*
+upload/images/*

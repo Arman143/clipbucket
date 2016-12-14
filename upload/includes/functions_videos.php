@@ -116,10 +116,13 @@ function get_thumb($vdetails, $num = 'default', $multi = false, $count = false, 
     if (!is_array($vdetails))
         $vdetails = $myquery->get_video_details($vdetails);
     
-    $thumbs = $cbvid->get_video_extras($vdetails['videoid'],$vdetails['extras']);
-    $thumbs = $vdetails['thumbs'] = $thumbs['thumbs'];
+	
+    $extras = $cbvid->get_video_extras($vdetails['videoid'],$vdetails['extras']);
+    $thumbs = $extras['thumbs'];
+    $vdetails['thumbs'] = $thumbs;
+
     
-    if ($vdetails['thumbs']) {
+    if ( $vdetails['thumbs'] ) {
         if ($return_full_path) {
             $folder = '';
             $folder = $vdetails['file_directory'];
@@ -966,6 +969,8 @@ function parse_duration($log) {
  * So wrap it with end() and problem solved.
  */
 function get_thumb_num($name) {
+
+    if(is_string($name) && $name)
     $list = end(explode('-', $name));
     $list = explode('.', $list);
     return $list[0];

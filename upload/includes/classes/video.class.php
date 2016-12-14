@@ -2438,12 +2438,13 @@ class CBvideo extends CBCategory {
     
     function get_video_field($vid,$field)
     {
-        $query = " SELECT ".$field." FROM ".tbl('videos');
+        $query = " SELECT ".$field." FROM ".tbl('video');
         $query .=" WHERE videoid='$vid '";
         $query .= " LIMIT 1 ";
         
         $result = db_select($query);
-        $extras = $result[0][$field];
+        return $result[0][$field];
+        
     }
     
     
@@ -2458,7 +2459,7 @@ class CBvideo extends CBCategory {
         {
             $extras = $this->get_video_field($vid,'extras');
         }
-        
+ 
         $extras = json_decode($extras,true);        
         $extras = apply_filters($extras, 'video_extras');
         
